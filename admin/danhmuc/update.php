@@ -1,8 +1,6 @@
 <?php
-// Đảm bảo có biến $dm trước khi extract
 if (isset($dm) && is_array($dm)) {
     extract($dm);
-    // $id, $name sẽ được gán từ mảng $dm
 } else {
     $id = '';
     $name = '';
@@ -19,7 +17,6 @@ if (isset($dm) && is_array($dm)) {
             <div class="row mb10">
                 Mã loại <br>
                 <input type="text" name="maloai_display" value="<?= htmlspecialchars($id) ?>" disabled>
-                <!-- Để gửi ID khi submit -->
                 <input type="hidden" name="ID" value="<?= htmlspecialchars($id) ?>">
             </div>
             <div class="row mb10">

@@ -19,9 +19,9 @@ $product = get_sanpham_by_id($id);
 <head>
     <meta charset="utf-8">
     <title>Chi tiết sản phẩm</title>
-    <!-- Bootstrap 5.3 -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    >
     <link rel="stylesheet" href="../assets/css/product-detail.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -30,57 +30,80 @@ $product = get_sanpham_by_id($id);
 <main role="main">
     <div class="container mt-4">
         <?php if ($product): ?>
-        <!-- Card sản phẩm -->
+        
         <div class="card mb-4 shadow-sm">
             <div class="container-fluid p-4">
                 <form method="post" action="cart.php?action=add&id=<?= $product['id'] ?>">
                     <div class="row g-4">
-                        <!-- Ảnh sản phẩm -->
+                        
                         <div class="col-md-6">
                             <img src="../uploads/<?= ($product['image'] && file_exists('../uploads/'.$product['image'])) ? $product['image'] : 'default.png' ?>" 
                                  class="img-fluid rounded shadow-sm" 
                                  alt="<?= htmlspecialchars($product['name']) ?>">
                         </div>
 
-                        <!-- Thông tin -->
+                        
                         <div class="col-md-6">
                             <h3 class="product-title mb-3"><?= htmlspecialchars($product['name']) ?></h3>
 
-                            <!-- Đánh giá -->
+                           
                             <div class="d-flex align-items-center mb-3">
                                 <div class="me-2 text-warning">⭐⭐⭐⭐☆</div>
                                 <span class="text-muted">123 đánh giá</span>
                             </div>
 
-                            <!-- Giá -->
+                            
                             <h4 class="text-danger fw-bold mb-3">
                                 <?= number_format($product['price'], 0, ',', '.') ?>đ
                             </h4>
 
-                            <!-- Mô tả -->
+                           
                             <p class="mb-3"><?= nl2br(htmlspecialchars($product['mota'])) ?></p>
 
-                            <!-- Danh mục -->
+                            
                             <p><strong>Danh mục:</strong> <?= htmlspecialchars(get_danhmuc_name($product['iddm'])) ?></p>
 
-                            <!-- Số lượng -->
+                            
                             <div class="mb-3">
                                 <label for="soluong" class="form-label">Số lượng đặt mua:</label>
                                 <input type="number" class="form-control w-25" id="soluong" name="soluong" value="1" min="1">
                             </div>
 
-                            <!-- Hành động -->
+                            
+                             
                             <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-success">🛒 Thêm vào giỏ hàng</button>
+                              
+                              <form method="post" action="cart.php?action=add&id=<?= $product['id'] ?>">
+                              <input type="hidden" name="soluong" id="soluong_cart" value="1">
+                              <button type="submit" class="btn btn-success">🛒 Thêm vào giỏ hàng</button>
+                              </form>
+
+                            
+                             <form method="post" action="index.php?act=checkout">
+                               <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                              <input type="hidden" name="qty" id="buyQty" value="1">
+                               <button type="submit" class="btn btn-danger">Mua ngay</button>
+                             </form>
+
                                 <button type="button" class="btn btn-outline-danger">❤️ Yêu thích</button>
-                            </div>
+                                </div>
+
+                               <script>
+                             // khi thay đổi số lượng => cập nhật cho cả 2 form
+                             document.getElementById('soluong').addEventListener('input', function() {
+                             document.getElementById('soluong_cart').value = this.value;
+                                document.getElementById('buyQty').value = this.value;
+                              });
+                             </script>
+
+                           
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Thông tin chi tiết -->
+        
         <div class="card mb-4">
             <div class="card-body">
                 <h3>Thông tin chi tiết về sản phẩm</h3>
@@ -88,7 +111,7 @@ $product = get_sanpham_by_id($id);
             </div>
         </div>
 
-        <!-- Sản phẩm liên quan -->
+        
         <div class="card mb-4">
             <div class="card-body">
                 <h4 class="mb-3">Sản phẩm liên quan</h4>

@@ -1,7 +1,7 @@
 <?php
 session_start();
-session_unset(); // Xóa tất cả biến session
-session_destroy(); // Hủy session
+session_unset(); 
+session_destroy(); 
 header("Location: ../auth/login.php");
 exit();
 ?>

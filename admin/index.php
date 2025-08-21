@@ -16,12 +16,12 @@ if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
 
-        /* ========== QUẢN LÝ DANH MỤC ========== */
+        /*QUẢN LÝ DANH MỤC*/
         case 'adddm':
             if (isset($_POST['themmoi'])) {
                 $name = $_POST['tenloai'] ?? '';
                 $thanhcong = insert_danhmuc($name);
-                $thongbao = $thanhcong ? "✅ Thêm mới thành công" : "❌ Thêm mới thất bại";
+                $thongbao = $thanhcong ? " Thêm mới thành công" : " Thêm mới thất bại";
             }
             include "danhmuc/add.php";
             break;
@@ -50,7 +50,7 @@ if (isset($_GET['act'])) {
                 $id = $_POST['ID'] ?? '';
                 $name = $_POST['tenloai'] ?? '';
                 $thanhcong = update_danhmuc($id, $name);
-                $thongbao = $thanhcong ? "✅ Cập nhật thành công" : "❌ Cập nhật thất bại";
+                $thongbao = $thanhcong ? " Cập nhật thành công" : " Cập nhật thất bại";
             }
             $listdanhmuc = get_all_danhmuc();
             include "danhmuc/list.php";
@@ -67,7 +67,7 @@ if (isset($_GET['act'])) {
             include "danhmuc/list.php";
             break;
 
-        /* ========== QUẢN LÝ SẢN PHẨM ========== */
+        /* QUẢN LÝ SẢN PHẨM*/
         case 'addsp':
             $listdanhmuc = get_all_danhmuc();
             if (isset($_POST['themmoi'])) {
@@ -85,7 +85,7 @@ if (isset($_GET['act'])) {
                 }
 
                 $thanhcong = insert_sanpham($name, $price, $image, $mota, $iddm);
-                $thongbao = $thanhcong ? "✅ Thêm sản phẩm thành công" : "❌ Thêm thất bại";
+                $thongbao = $thanhcong ? " Thêm sản phẩm thành công" : " Thêm thất bại";
             }
             include "sanpham/add.php";
             break;
@@ -152,15 +152,15 @@ if (isset($_GET['act'])) {
             include "sanpham/list.php";
             break;
 
-        /* ========== DASHBOARD ========== */
+        /*DASHBOARD*/
         case 'thongke':
-            // Giả sử các hàm get_all_* trả về mảng rồi
+            
             $listdanhmuc = get_all_danhmuc();
             $listsanpham = get_all_sanpham();
             $listnguoidung = get_all_nguoidung();
             $listbinhluan = loadall_binhluan();
         
-            // Đếm vai trò
+            
             $admin_count = 0;
             $user_count = 0;
             foreach ($listnguoidung as $nd) {
@@ -174,7 +174,7 @@ if (isset($_GET['act'])) {
             include "thongke/list.php";
             break;
         
-        /* ========== QUẢN LÝ NGƯỜI DÙNG ========== */
+        /* QUẢN LÝ NGƯỜI DÙNG */
         case 'addnd':
             if (isset($_POST['themmoi'])) {
                 $name = $_POST['name'] ?? '';
@@ -182,7 +182,7 @@ if (isset($_GET['act'])) {
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $role = $_POST['role'] ?? 'user';
         
-                // Kiểm tra email đã tồn tại chưa
+                
                 $ds_email = get_email_nguoidung($email);
                 if ($ds_email) {
                     $thongbao = "❌ Email đã tồn tại!";
@@ -248,7 +248,7 @@ if (isset($_GET['act'])) {
                 $listkhachhang = get_all_khachhang();
                 include "nguoidung/listkh.php";
                 break;
-                /* ========== QUẢN LÝ BÌNH LUẬN ========== */
+                /*QUẢN LÝ BÌNH LUẬN */
                 case 'listbl':
                     $listbinhluan = loadall_binhluan();
                     include "binhluan/list.php";
@@ -257,7 +257,7 @@ if (isset($_GET['act'])) {
                 case 'xoabinhluan':
                     if (isset($_GET['id']) && $_GET['id'] > 0) {
                         delete_binhluan($_GET['id']);
-                        $thongbao = "✅ Đã xóa bình luận thành công!";
+                        $thongbao = " Đã xóa bình luận thành công!";
                     }
                     $listbinhluan = loadall_binhluan();
                     include "binhluan/list.php";
@@ -268,13 +268,13 @@ if (isset($_GET['act'])) {
                         foreach ($_POST['chon'] as $id) {
                             delete_binhluan($id);
                         }
-                        $thongbao = "✅ Đã xóa các bình luận được chọn!";
+                        $thongbao = " Đã xóa các bình luận được chọn!";
                     }
                     $listbinhluan = loadall_binhluan();
                     include "binhluan/list.php";
                     break;
 
-            // -------- MẶC ĐỊNH: TRANG HOME --------
+            //  TRANG HOME
         }
     } else {
         include "home.php";

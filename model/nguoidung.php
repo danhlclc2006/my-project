@@ -39,7 +39,7 @@ function get_email_nguoidung($email) {
 }
 function index() {
     $listnguoidung = get_all_nguoidung(); // Hàm lấy danh sách người dùng từ DB
-    include 'view/nguoidung/list.php'; // đường dẫn đúng đến file hiển thị danh sách
+    include 'view/nguoidung/list.php'; 
 }
 function get_all_khachhang() {
     $sql = "SELECT * FROM nguoidung WHERE role = 'user' ORDER BY id DESC";

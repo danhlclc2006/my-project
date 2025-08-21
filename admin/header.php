@@ -28,7 +28,7 @@ $username = $_SESSION['user']['username'] ?? 'Admin';
         </div>
         <div class="row mb menu">
             <ul>
-                <!-- Trang chủ -->
+                
                 <li><a href="home.php" class="<?= basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : '' ?>">
                     <i class="fas fa-home"></i> Trang chủ
                 </a></li>
@@ -40,7 +40,7 @@ $username = $_SESSION['user']['username'] ?? 'Admin';
                 <li><a href="index.php?act=listbl" class="<?= isset($_GET['act']) && $_GET['act'] == 'listbl' ? 'active' : '' ?>"><i class="fas fa-comments"></i> Bình luận</a></li>
                 <li><a href="index.php?act=thongke" class="<?= isset($_GET['act']) && $_GET['act'] == 'thongke' ? 'active' : '' ?>"><i class="fas fa-chart-bar"></i> Thống kê</a></li>
 
-                <!-- Đăng xuất -->
+                
                 <li><a href="../auth/logout.php">
                     <i class="fas fa-sign-out-alt"></i> Đăng xuất
                 </a></li>

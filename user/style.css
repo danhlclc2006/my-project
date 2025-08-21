@@ -1,36 +1,37 @@
+
+/* Header */
+header, .navbar {
+  flex-shrink: 0;
+}
 /* Reset */
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f9fa;
-  }
-  
-  /* Header */
-  .navbar {
-    position: relative;
-    width: 100%;
-    z-index: 1030;
-  }
-  
-  /* Body */
-  body {
-    padding-bottom: 70px; /* giữ nếu bạn có footer fixed */
-  }
-  
-  /* Main để đẩy footer xuống */
-  main {
-    flex: 1;
-  }
-  
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #1d1f23;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  z-index: 1030; /* để nổi lên trên */
+}
+
   /* Layout sản phẩm */
   .products {
     display: grid;

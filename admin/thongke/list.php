@@ -55,7 +55,6 @@
         </div>
     </div>
 
-    <!-- Biểu đồ -->
     <div class="row mt-5">
         <div class="col-md-6">
             <h5 class="text-center">Thống kê người dùng</h5>

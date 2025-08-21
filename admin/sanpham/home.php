@@ -1,4 +1,4 @@
-<!-- admin/home.php -->
+
 <div class="row">
     <div class="frmtitel">
         <h1>TRANG QUẢN TRỊ</h1>

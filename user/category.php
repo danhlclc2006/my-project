@@ -4,40 +4,38 @@ require_once "../model/sanpham.php";
 require_once "../model/danhmuc.php";
 include "header.php"; 
 
-// Lấy tham số GET
+
 $iddm    = $_GET['iddm'] ?? '';
 $search  = $_GET['search'] ?? '';
 $price   = $_GET['price'] ?? '';
 $page    = isset($_GET['p']) ? max(1, intval($_GET['p'])) : 1; 
 
-// Cấu hình phân trang
+
 $limit   = 8; 
 $offset  = ($page - 1) * $limit;
 
-// Lấy danh mục
+
 $danhmucs = get_all_danhmuc();
 
-// Lấy danh sách sản phẩm
 $products = get_all_sanpham_paging($limit, $offset, $search, $iddm, $price);
 
-// Tổng số sản phẩm để phân trang
 $totalProducts = count_sanpham($search, $iddm, $price);
 $totalPages = ceil($totalProducts / $limit);
-
 ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>VMartPlus - Danh mục sản phẩm</title>
+    <title>XSHOP Plus - Danh mục sản phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<main>
 <div class="container my-4">
     <div class="row">
-        <!-- Sidebar danh mục -->
+        
         <aside class="col-md-3 mb-4">
             <h5 class="mb-3">Danh mục sản phẩm</h5>
             <ul class="list-group">
@@ -64,7 +62,7 @@ $totalPages = ceil($totalProducts / $limit);
             </ul>
         </aside>
 
-        <!-- Danh sách sản phẩm -->
+        
         <section class="col-md-9">
             <h4 class="mb-3 text-danger">
                 <?php 
@@ -103,7 +101,7 @@ $totalPages = ceil($totalProducts / $limit);
                 <?php endif; ?>
             </div>
 
-            <!-- Phân trang -->
+            
             <?php if ($totalPages > 1): ?>
                 <nav class="mt-4">
                     <ul class="pagination justify-content-center">
@@ -121,6 +119,7 @@ $totalPages = ceil($totalProducts / $limit);
         </section>
     </div>
 </div>
+</main> 
 
 <?php include "footer.php"; ?>
 

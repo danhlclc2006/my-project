@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../model/connectDB.php'; // đường dẫn an toàn
+require_once __DIR__ . '/../model/connectDB.php'; 
 
 
 $db = new connectDB();
@@ -13,35 +13,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($identifier === '' || $password === '') {
         $error = "Vui lòng nhập đầy đủ thông tin.";
     } else {
-        // Tùy theo cấu trúc bảng của bạn: ở project trước bạn dùng bảng 'nguoidung'
+       
         $sql = "SELECT * FROM nguoidung WHERE email = ? OR name = ? LIMIT 1";
-        // Nếu bạn có cột username thay name, đổi name -> username
+        
         $user = $db->queryOne($sql, [$identifier, $identifier]);
 
         if ($user) {
             $stored = $user['password'] ?? '';
 
-            // Hỗ trợ cả password đã hash (password_hash) và plaintext (nếu legacy)
+            
             $ok = false;
             if ($stored !== '' && password_verify($password, $stored)) {
                 $ok = true;
             } elseif ($password === $stored) {
-                // nếu DB lưu plaintext (không khuyến nghị) — fallback để tương thích legacy
+                
                 $ok = true;
             }
 
             if ($ok) {
-                // login success
+                
                 $_SESSION['user'] = $user;
 
                 // Quy ước role: có thể là 'admin'/'user' hoặc 1/0
                 $role = $user['role'] ?? '';
 
                 if ($role === 'admin' || $role === '1' || $role === 1) {
-                    header("Location: ../admin/home.php"); // hoặc admin/dashboard.php tuỳ project
+                    header("Location: ../admin/home.php"); 
                     exit;
                 } else {
-                    header("Location: ../user/home.php"); // hoặc đường dẫn dashboard user
+                    header("Location: ../user/home.php"); 
                     exit;
                 }
             } else {

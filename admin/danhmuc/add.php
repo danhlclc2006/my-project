@@ -19,7 +19,7 @@
                 <a href="index.php?act=listdm"><input type="button" value="DANH SÁCH"></a>
             </div>
 
-            <!-- Thông báo nếu có -->
+            
             <?php if (!empty($thongbao)): ?>
                 <div class="row mb10" style="color: green;">
                     <?= $thongbao ?>
